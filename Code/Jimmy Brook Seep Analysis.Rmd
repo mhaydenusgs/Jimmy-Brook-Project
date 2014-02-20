@@ -1,0 +1,99 @@
+#Jimmy Seeps Tests Ananysis
+
+## Load Packages
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+## Load Data
+```{r}
+setwd("/Users/michaeljames/Documents/R Projects/Jimmy_Brook_Project/Jimmy_Seep_Analysis/Jimmy_Seep_Analysis/Data In")
+Temp <- read.csv('R Seeps Test.csv', header = T)
+Test1 <- hread.csv('Test Data Frame 1.csv', header = T)
+XX <- read.csv('Workbook2.csv', header = T)
+## Test tko see if data is loaded
+Temp <- tbl_df(Temp)
+```
+
+## Mess with the Data
+```{r}
+### Failed Attempt Dumb Fuck
+#Top <- filter(Temp, Level == 1)
+#Middle <- filter(Temp, Level == 2)
+#Bottom <- filter(Temp, Level == 3)
+#OneForty1 <- filter(Temp, Section == 140.0, Level == 1)
+#OneForty2 <- filter(Temp, Section == 140.0, Level == 2)
+#OneForty3 <- filter(Temp, Section == 140.0, Level == 3)
+
+### Create functions to extract levels
+ExtractLevel <- function(y) {filter(Temp, Level == y)}
+Extract <- function(x, y){filter(Temp, Level == y)}
+ExtractSection <- function(x){filter(Test1, Section == x)}
+#Put togeather 
+
+### Another failed attempt FOOL!
+#Top <- ExtractLevel(140, 1)
+#Middle <- ExtractLevel(140, 2)
+#Bottom <- ExtractLevel(140, 3)
+#t <- select(Top, Meter:Temp)
+#m <- select(Middle, Meter:Temp)
+#b <- select(Bottom, Meter:Temp)
+A <- ExtractLevel(1)
+B <- ExtractLevel(2)
+C <- ExtractLevel(3)
+G <- Extract(140.0, 1)
+D <- ExtractSection(140.3)
+```
+
+## Plot the Data
+
+### Bottom Map
+```{r}
+### Bottom Area Map
+b <- ggplot(A, aes(x = Meter, y= Section))
+b <- b + geom_tile(aes(fill = Temp))
+b <- b + scale_fill_continuous(low= "blue", high = "red", space = "Lab")
+b
+```
+
+### Middle Map
+```{r}
+m <- ggplot(B, aes(x = Meter, y= Section))
+m <- m + geom_tile(aes(fill = Temp))
+m <- m + scale_fill_continuous(low= "blue", high = "red", space = "Lab")
+m
+```
+
+### Top Area Map
+```{r}
+t <- ggplot(C, aes(x = Meter, y= Section))
+t <- t + geom_tile(aes(fill = Temp))
+t <- t + scale_fill_continuous(low= "blue", high = "red", space = "Lab")
+t 
+```
+
+### All Cross Section
+```{r}
+s <- ggplot(Test1, aes(x = Meter, y= Height))
+s <- s + geom_tile(aes(fill = Temp))
+s <- s + scale_fill_continuous(low= "blue", high = "red", space = "Lab")
+#s <- s + facet_wrap(~Section)
+s
+```
+git clone https://github.com/git/git
+
+### All Cross Section
+```{r}
+s <- ggplot(Test, aes(x = Meter, y= Level))
+s <- s + geom_tile(aes(fill = Temp))
+#s <- s + scale_fill_gradientn(colours=Temp(7))
+s <- s + scale_fill_continuous(low= "blue", high = "red", space = "Lab")
+#s <- s + facet_wrap(~Section)
+s
+```
+
+
+
+
+

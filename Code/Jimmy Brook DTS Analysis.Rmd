@@ -1,0 +1,9 @@
+### Load Data
+```{r}
+
+DTS <- read.csv('DTS Data.csv', header = T)
+plot(DTS$Cable.Length, DTS$Temperature)
+ggplot(DTS, aes (x= Cable.Length, y= Temperature)) + geom_point(aes(fill = "Temperature"))
+library(ggplot2)
+````
+
