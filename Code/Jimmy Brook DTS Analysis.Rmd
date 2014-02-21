@@ -1,16 +1,23 @@
+### Load Packages
+```{r}
+library(ggplot2)
+```
+
 ### Load Data
 ```{r}
 DTS <- read.csv('DTS Data.csv', header = T)
 ```
 
+### Modify the Data
 ```{r}
-x <- DTS[1:3992,]
+x <- DTS[1:3960,]
+y <- DTS[3961:7920,]
 head(x)
 ```
 
-###
+### Plot the DTS Data in Whole then split up form
 ```{r}
-### Basic Plot in Plot to see what is there
+### Basic Plot in Plot to see whatjhfgjhg is there
 plot(DTS$Cable.Length, DTS$Temperature)
 
 ### Formal Plot in GGplot
@@ -18,4 +25,14 @@ ggplot(DTS, aes (x= Cable.Length, y= Temperature)) + geom_line(aes(fill = "Tempe
 
 ### Half of the cable length
 ggplot(x, aes(x= Cable.Length, y= Temperature)) + geom_line(aes(fill = "Temperature"))
+```
+
+### Plot the Difference between one side of the Cable to the Other
+```{r}
+x1 <- x$Temperature
+y1 <- y$Temperature
+z <- x1-y1
+g <- 1:3960
+Z <- data.frame(g, z)
+ggplot(Z, aes(x= g, y= z)) + geom_line(aes(fill = "z"))
 ```
