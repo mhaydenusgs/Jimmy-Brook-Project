@@ -1,9 +1,21 @@
 ### Load Data
 ```{r}
-
 DTS <- read.csv('DTS Data.csv', header = T)
-plot(DTS$Cable.Length, DTS$Temperature)
-ggplot(DTS, aes (x= Cable.Length, y= Temperature)) + geom_point(aes(fill = "Temperature"))
-library(ggplot2)
-````
+```
 
+```{r}
+x <- DTS[1:3992,]
+head(x)
+```
+
+###
+```{r}
+### Basic Plot in Plot to see what is there
+plot(DTS$Cable.Length, DTS$Temperature)
+
+### Formal Plot in GGplot
+ggplot(DTS, aes (x= Cable.Length, y= Temperature)) + geom_line(aes(fill = "Temperature"))
+
+### Half of the cable length
+ggplot(x, aes(x= Cable.Length, y= Temperature)) + geom_line(aes(fill = "Temperature"))
+```
