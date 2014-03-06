@@ -1,38 +1,57 @@
 ### Load Packages
 ```{r}
 library(ggplot2)
+library(dplyr)
 ```
 
 ### Load Data
 ```{r}
-DTS <- read.csv('DTS Data.csv', header = T)
+setwd("/Users/michaeljames/Documents/R_Projects/Jimmy_Brook_Project/Jimmy Seeps R Code/Jimmy-Brook-Project/Data In")
+dts <- read.csv('DTS Data.csv', header = T)
 ```
 
 ### Modify the Data
 ```{r}
-x <- DTS[1:3960,]
-y <- DTS[3961:7920,]
-head(x)
+dts <- filter(dts, Temperature < 21, Temperature > 18)
+head(dts)
+dtsLoop1 <- dts[1:3959,]
+dtsLoop2 <- dts[3960:7918,]
+dtsLoopCombined <- data.frame(dtsLoop1, dtsLoop2)
+g <- (1:3959)
+h <- (3960:1)
+dts$Temperature
+
+
 ```
 
 ### Plot the DTS Data in Whole then split up form
 ```{r}
-### Basic Plot in Plot to see whatjhfgjhg is there
-plot(DTS$Cable.Length, DTS$Temperature)
+### Basic Plot in Plot to see what is there
+plot(dts$Cable.Length, dts$Temperature)
 
 ### Formal Plot in GGplot
-ggplot(DTS, aes (x= Cable.Length, y= Temperature)) + geom_line(aes(fill = "Temperature"))
+ggplot(dts, aes (x= Cable.Length, y= Temperature)) + geom_point(aes(fill = "Temperature"))
+
+
+ggplot(dtsLoopCombined, aes (x= Cable.Length, y= Temperature)) + geom_point(aes(fill = "Temperature"))
 
 ### Half of the cable length
-ggplot(x, aes(x= Cable.Length, y= Temperature)) + geom_line(aes(fill = "Temperature"))
+ggplot(dts, aes(h)) + 
+       geom_point(aes(y = dtsLoop1, colour = "dtsLoop1")) +
+       geom_point(aes(y = dtsLoop2, colour = "dtsLoop2"))
 ```
 
-### Plot the Difference between one side of the Cable to the Other
-```{r}
-x1 <- x$Temperature
-y1 <- y$Temperature
-z <- x1-y1
-g <- 1:3960
-Z <- data.frame(g, z)
-ggplot(Z, aes(x= g, y= z)) + geom_line(aes(fill = "z"))
+
+negative2 <- arrange(Negative, h )
+D <- data.frame(negative2, x1)
+ggplot(D, aes(h)) + 
+  geom_point(aes(y = y1, colour = "y1")) + 
+  geom_point(aes(y = x1, colour = "x1"))
+ggplot(D, aes(x = x1, y = y1)) + geom_point()
+
 ```
+
+
+
+
+
